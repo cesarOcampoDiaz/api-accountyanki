@@ -19,7 +19,8 @@ public class AccountYankiRouter {
                 .andRoute(GET("/accountYanki").and(accept(MediaType.TEXT_EVENT_STREAM)), transactionHandler::findAll)
                 .andRoute(GET("/accountYanki/{id}").and(accept(MediaType.APPLICATION_JSON)), transactionHandler::findById)
                 .andRoute(PUT("/accountYanki/{id}").and(accept(MediaType.APPLICATION_JSON)), transactionHandler::update)
-                .andRoute(GET("/accountYanki/sald/trans").and(accept(MediaType.APPLICATION_JSON)),transactionHandler::balance);
+                .andRoute(GET("/accountYanki/sald/trans").and(accept(MediaType.APPLICATION_JSON)),transactionHandler::balance)
+                .andRoute(GET("/accountYanki/client/{clientId}").and(accept(MediaType.APPLICATION_JSON)),transactionHandler::balance);
 
 
     }

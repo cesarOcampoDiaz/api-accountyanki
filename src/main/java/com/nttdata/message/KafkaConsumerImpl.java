@@ -11,14 +11,7 @@ import reactor.core.publisher.Mono;
 @Component
 public class KafkaConsumerImpl implements  KafkaConsumer{
 
-    //private  final KafkaTemplate<String, Transaction> kafkaTemplate;
     public static Mono<Transaction> tran;
-
-    /*public KafkaConsumerImpl( Mono<Transaction> tran) {
-        //this.kafkaTemplate = kafkaTemplate;
-        this.tran = tran;
-    }*/
-
 
    @KafkaListener(topics = "trasanctionYanki",groupId = "myGroup")
    public void listenTopic(Transaction transaction){
@@ -26,7 +19,6 @@ public class KafkaConsumerImpl implements  KafkaConsumer{
        tran=Mono.just(transaction);
 
    }
-
 
     @Override
     public Mono<Transaction> getTransaction() {

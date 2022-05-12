@@ -29,6 +29,7 @@ public class AccountYankiHandler {
 
     @Autowired
     public AccountYankiHandler(AccountYankiRepository accountRepository) {
+
         this.accountRepository = accountRepository;
     }
 
@@ -58,6 +59,20 @@ public class AccountYankiHandler {
         );
     }
 
+
+    //public Mono<>
+
+    public Mono<ServerResponse> findByClientId(ServerRequest serverRequest) {
+        var id = serverRequest.pathVariable("clientId");
+        var accountItem = accountRepository.findById(id);
+
+
+        return accountItem.flatMap(t -> ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(accountItem, AccountYanki.class)
+                .switchIfEmpty(notFound)
+        );
+    }
     public Mono<ServerResponse> balance(ServerRequest serverRequest) {
 
         var accountItem = kafkaConsumer.getTransaction();
